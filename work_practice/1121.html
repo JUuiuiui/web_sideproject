@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+    <!-- materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        function formresponse(){
+            var n = document.forms["form1"]["name"].value;
+            var e = document.forms["form1"]["email"].value;
+            var c = document.forms["form1"]['content'].value;
+            if (n == null || n=="" )
+              {
+                  alert("姓名不可為空白！");
+                  return false;
+              }
+            else if (e == null || e=="")
+              {
+                  alert("信箱不可為空白！");
+                  return false;
+              }
+            else if (c == null || c=="" )
+              {
+                  alert("內容不可為空白！");
+                  return false;
+              }
+            else
+              {
+                  var Mysubmit = "https://docs.google.com/forms/d/e/1FAIpQLSeDhRYL3YgiQsOUeJdS8zV_svCDbJKl3c7lq-HfFTSoZ8yLYQ/formResponse?&entry.16313111="+n+"&entry.813883030="+e+"&entry.1656011240="+c+"&submit=Submit";
+                  var NewOpen = window.open(Mysubmit);
+              }
+        }
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(init);
+        function GetUrlVar(VarName) 
+		{
+		  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		  var regexS = "[\\?&]" + VarName + "=([^&#]*)";
+		  var regex = new RegExp(regexS);
+		  var results = regex.exec(window.location.href);
+		  if (results == null)
+		   	 return "";
+		  else
+			 return results[1];
+		}
+		  // 要先取得網址裡的路徑起點終點經緯度參數 
+        var n = decodeURIComponent(GetUrlVar('id'));
+        var queryStr = "select* where D="+n;
+
+
+        function init(){
+            var url = 'https://docs.google.com/spreadsheets/d/1DCxMO7ongWN-ksfq6qw1mydU_nI1q3RdLC7XQ1E8roE/gviz/tq?sheet=工作表1';
+            var query = new google.visualization.Query(url);
+            query.setQuery(queryStr);
+            query.send(processSheetsData);
+        }
+        function processSheetsData(response) {
+	        var data = response.getDataTable();
+	        var columns = data.getNumberOfColumns();
+	        var rows = data.getNumberOfRows();
+
+            var str=' ';
+            for (var r=0 ; r<rows ; r++) {
+                str+= '  <div class="row">';
+                str+= '    <div class="col s12 m6">';
+                str+= '      <div class="card">';
+                str+= '        <div class="card-image">';
+                str+= '          <span class="card-title">'+ data.getFormattedValue(r,0) +'</span>';
+                str+= '          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>';
+                str+= '        </div>';
+                str+= '        <div class="card-content">';
+                str+= '          <p>'+ data.getFormattedValue(r,2) +'</p>';        
+                str+= '          <p>'+ data.getFormattedValue(r,3) +'</p>';
+                str+= '          <p>時間'+ data.getFormattedValue(r,3) +'</p>';
+                str+= '        </div>';
+                str+= '      </div>';
+                str+= '    </div>';
+                str+= '  </div>';
+            }
+            document.getElementById("demo").innerHTML = str;               
+        }
+    </script>
+</head>
+<body>
+    <form name="form1" action="javascript:formresponse();">
+        姓名：<input type="text" name="name"><br/>
+        信箱：<input type="email" name="email"><br>
+        內容：<input type="text" name="content">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="demo"></div>
+</body>

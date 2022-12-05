@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="CHIEH-YU(JU) JEN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <meta 
+    name="description" 
+    content="">
+    <meta name="robot" content="index, follow">
+    <!--Font setting-->
+
+    <link rel="stylesheet" href="./styles/style.css">
+    <script type="text/javascript">
+        function formresponse(){
+            var name = document.forms["form1"]["Name"].value;
+            var email = document.forms["form1"]["Email"].value;
+            var content = document.forms["form1"]['Content'].value;
+            if (Name == null || Name=="" )
+            {
+                alert("姓名不可為空白！");
+                return false;
+            }
+            else if (Email == null || Email=="")
+            {
+                alert("信箱不可為空白！");
+                return false;
+            }
+            else if (Content == null || Content=="" )
+            {
+                alert("內容不可為空白！");
+                return false;
+            }
+            else
+            {
+                var Mysubmit = "https://docs.google.com/forms/d/e/1FAIpQLSeDhRYL3YgiQsOUeJdS8zV_svCDbJKl3c7lq-HfFTSoZ8yLYQ/formResponse&entry.16313111="+name+"&entry.813883030="+email+"&entry.1656011240="+content+"&submit=Submit";
+                var NewOpen = window.open(Mysubmit);
+            }
+        }
+    </script>
+</head>
+<body>
+    <form name="form1" action="javascript:formresponse();">
+        姓名：<input type="text" name="Name"><br/>
+        信箱：<input type="email" name="Email"><br>
+        內容：<input type="text" name="Content">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -81,7 +81,7 @@ header nav ul li a {
 main section.backImage {
   min-height: 90vh;
   width: 100%;
-  background-image: url("/images/Pictures/background.JPEG");
+  background-image: url("../images/Pictures/background.JPEG");
   background-size: cover;
   background-position: center;
   position: relative;

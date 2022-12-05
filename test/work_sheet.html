@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="CHIEH-YU(JU) JEN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <meta 
+    name="description" 
+    content="">
+    <meta name="robot" content="index, follow">
+    <!--Font setting-->
+
+    <link rel="stylesheet" href="./styles/style.css">
+
+    <!--GoogleChart資料庫建立-->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(init);
+
+        function init(){
+            var url = 'https://docs.google.com/spreadsheets/d/1PspESk8XkwXeomw_ZsPa-Cb3T42aMgODpjI5NvDszbM/edit?usp=sharing';
+            var query = new google.visualization.Query(url);
+            query.setQuery('select');
+            query.send(processSheetsData);
+        }
+    </script>
+
+</head>
+<body>
+	<form name="form1" action="javascript:formresponse();">
+		Name: <input type="text" name="meal"><br />
+		E-mail: <input type="text" name="drink"><br />
+        Content: <input type="text" name="drink"><br />
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
